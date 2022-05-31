@@ -1,0 +1,24 @@
+{
+  "name": "viii-semin-rio-de-p.e-2022-1-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niclae/VIII-SEMIN-RIO-DE-P.E-2022-1-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Niclae/VIII-SEMIN-RIO-DE-P.E-2022-1-/issues"
+  },
+  "homepage": "https://github.com/Niclae/VIII-SEMIN-RIO-DE-P.E-2022-1-#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express')
 
-const PORT = process.env.PORT || 3001;
+const app = express()
 
-const app = express();
+const PORT = process.env.PORT || 3001
 
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
-  
+app.use('/', require('./route/bussControllRoutes'))
+
+app.use(express.json)
+
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
-});
+  console.log(`Server listening on ${PORT}`)
+})

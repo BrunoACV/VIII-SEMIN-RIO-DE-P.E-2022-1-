@@ -5,7 +5,9 @@ exports.getFrota = function () {
 }
 
 exports.getOnibusById = function (id) {
-  return database.oneOrNone('select * from busscontroll.frota where id = $1', [id])
+  return database.oneOrNone('select * from busscontroll.frota where id = $1', [
+    id
+  ])
 }
 
 exports.saveOnibus = function (onibus) {

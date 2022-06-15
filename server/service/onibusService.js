@@ -1,21 +1,21 @@
-const bussControllData = require('../data/onibus')
+const onibusData = require('../data/onibus')
 
 exports.getFrota = function () {
-  return bussControllData.getFrota()
+  return onibusData.getFrota()
 }
 
-exports.getOnibusById = function () {
-  return bussControllData.getOnibusById()
+exports.getOnibusById = function (id) {
+  return onibusData.getOnibusById(id)
 }
 
 exports.saveOnibus = function (onibus) {
-  return bussControllData.saveOnibus(onibus)
+  return onibusData.saveOnibus(onibus)
 }
 
 exports.deleteOnibus = function (id) {
-  return bussControllData.deleteOnibus(id)
+  return onibusData.deleteOnibus(id)
 }
 
 exports.atualizarOnibus = function (id, onibus) {
-  return bussControllData.atualizarOnibus(id)
+  return onibusData.atualizarOnibus(id, onibus)
 }

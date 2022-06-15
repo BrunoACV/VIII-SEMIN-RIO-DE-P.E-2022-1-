@@ -1,7 +1,7 @@
 const axios = require('axios')
 const crypto = require('crypto')
-const req = require('express/lib/request')
-const bussControllService = require('../service/onibusService')
+const req = require('../../node_modules/express/lib/request')
+const onibusService = require('../service/onibusService')
 
 const generate = function () {
   return crypto.randomBytes(20).toString('hex')
@@ -13,15 +13,15 @@ const request = function (url, method, data) {
 
 test('Deve pegar a frota de onibus', async function () {
   //Given - dado que
-  const onibus1 = await bussControllService.saveOnibus({
+  const onibus1 = await onibusService.saveOnibus({
     trajeto: generate(),
     tempoTrajeto: generate()
   })
-  const onibus2 = await bussControllService.saveOnibus({
+  const onibus2 = await onibusService.saveOnibus({
     trajeto: generate(),
     tempoTrajeto: generate()
   })
-  const onibus3 = await bussControllService.saveOnibus({
+  const onibus3 = await onibusService.saveOnibus({
     trajeto: generate(),
     tempoTrajeto: generate()
   })
@@ -32,9 +32,9 @@ test('Deve pegar a frota de onibus', async function () {
   //Then - então
   expect(frota).toHaveLength(3)
 
-  await bussControllService.deleteOnibus(onibus1.id)
-  await bussControllService.deleteOnibus(onibus2.id)
-  await bussControllService.deleteOnibus(onibus3.id)
+  await onibusService.deleteOnibus(onibus1.id)
+  await onibusService.deleteOnibus(onibus2.id)
+  await onibusService.deleteOnibus(onibus3.id)
 })
 
 test('Deve salvar um Onibus', async function () {
@@ -49,31 +49,31 @@ test('Deve salvar um Onibus', async function () {
   //Then - então
   expect(onibus.trajeto).toBe(data.trajeto)
   expect(onibus.tempoTrajeto).toBe(data.tempoTrajeto)
-  await bussControllService.deleteOnibus(onibus.id)
+  await onibusService.deleteOnibus(onibus.id)
 })
 
 test('Deve atualizar um Onibus', async function () {
   //Given - dado que
-  const onibus = {
+  const onibus = await onibusService.saveOnibus({
     trajeto: generate(),
     tempoTrajeto: generate()
-  }
+  })
   onibus.trajeto = generate()
   onibus.tempoTrajeto = generate()
 
   //When - quando acontecer
   await request(`http:/localhost:3001/frota/${onibus.id}`, 'put', onibus)
-  const onibusAtualizado = await bussControllService.getOnibusById(onibus.id)
+  const onibusAtualizado = await onibusService.getOnibusById(onibus.id)
 
   //Then - então
   expect(onibusAtualizado.trajeto).toBe(onibus.trajeto)
   expect(onibusAtualizado.tempoTrajeto).toBe(onibus.tempoTrajeto)
-  await bussControllService.deleteOnibus(onibus.id)
+  await onibusService.deleteOnibus(onibus.id)
 })
 
 test('Deve deletar um Onibus', async function () {
   //Given - dado que
-  const onibus = await bussControllService.saveOnibus({
+  const onibus = await onibusService.saveOnibus({
     trajeto: generate(),
     tempoTrajeto: generate()
   })
@@ -82,6 +82,6 @@ test('Deve deletar um Onibus', async function () {
   await request(`http:/localhost:3001/frota/${onibus.id}`, 'delete')
 
   //Then - então
-  const frota = await bussControllService.getFrota()
+  const frota = await onibusService.getFrota()
   expect(frota).toHaveLength(0)
 })
